@@ -23,8 +23,26 @@ let lockBoard = false;
 */
 function initGame() {
     // Write your code here
-
+    document.getElementById('game-board').innerHTML = "";
     document.getElementById('restart-btn').addEventListener('click', initGame);
+
+     const gameBoard = document.getElementById('game-board');
+
+    // adds each symbol to cards twice
+    for (let i = 0; i < 2; i++) {
+        for (let j = 0; i < symbols.length; j++) {
+            cards.push(symbols[j]);
+        }
+    }
+
+    shuffleArray(cards)
+
+    // adds cards to gameboard
+    for (let i = 0; i < cards.length; i++) {
+        const card = createCard(cards[i]);
+        gameBoard.appendChild(card);
+
+    }
 }
 
 /*
@@ -34,7 +52,12 @@ function initGame() {
     Also make sure to add the event listener with the 'flipCard' function
 */
 function createCard(symbol) {
-    // Write your code here
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.dataset.symbol = symbol;
+    card.addEventListener('click', () => flipCard(card));
+    return card;
+
 }
 
 /*
